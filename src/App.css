@@ -2,11 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
 .App-header {
   background-color: #222;
   height: 150px;
@@ -15,11 +10,24 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 2.5em;
+  font-family: 'Monoton', cursive;
+}
+
+.Home {
+  margin-top: 30px;
 }
 
 .App-intro {
   font-size: large;
+}
+
+.ui.right.labeled.icon.button {
+  margin: 20px;
+}
+
+i.down.arrow.icon {
+  margin: 10px;
 }
 
 @keyframes App-logo-spin {

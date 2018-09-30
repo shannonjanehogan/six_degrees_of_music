@@ -6,15 +6,13 @@ import SearchBar from './SearchBar';
 class Home extends Component {
   render() {
     return (
-      <div>
+      <div className="Home">
         <p className="App-intro">
           Find the shortest paths from
         </p>
-        <SearchBar/>
-        <p className="App-intro">
-          to
-        </p>
-        <SearchBar/>
+        <SearchBar className="First-search-bar"/>
+        <i class="down arrow icon"></i>
+        <SearchBar className="Second-search-bar"/>
         <Link to="/dashboard">
           <button class="ui right labeled icon button">
             Go!
