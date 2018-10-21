@@ -13,7 +13,7 @@ class Home extends Component {
         <SearchBar className="First-search-bar"/>
         <i class="down arrow icon"></i>
         <SearchBar className="Second-search-bar"/>
-        <Link to="/dashboard">
+        <Link to="/search-results">
           <button class="ui right labeled icon button">
             Go!
             <i class="right arrow icon"></i>

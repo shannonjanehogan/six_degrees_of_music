@@ -3,6 +3,7 @@ import { Button, Icon, Grid } from 'semantic-ui-react';
 import { Route, Link } from 'react-router-dom';
 import logo from './logo.svg';
 import Home from './Home.js'
+import SearchResults from './SearchResults.js'
 import './App.css';
 
 class App extends Component {
@@ -14,6 +15,7 @@ class App extends Component {
           <h1 className="App-title">Six Degrees of Music</h1>
         </header>
         <Route exact path="/" component={Home}/>
+        <Route exact path="/search-results" component={SearchResults}/>
       </div>
     );
   }
