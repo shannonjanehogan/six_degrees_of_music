@@ -3,16 +3,16 @@ import React, { Component } from 'react';
 class MusicianCard extends Component {
   render() {
     return (
-      <div class="card">
-        <div class="content">
-          <i class="circular inverted teal big music icon"></i>
-          <div class="header">
+      <div className="card">
+        <div className="content">
+          <i className="circular inverted teal big music icon"></i>
+          <div className="header">
             {this.props.artistone}
           </div>
-          <div class="meta">
+          <div className="meta">
             {this.props.feature} {this.props.artisttwo}
           </div>
-          <div class="description">
+          <div className="description">
             {this.props.song}
           </div>
         </div>

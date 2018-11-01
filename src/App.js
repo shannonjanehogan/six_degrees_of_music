@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <i class="circular inverted teal big music icon"></i>
+          <i className="circular inverted teal big music icon"></i>
           <h1 className="App-title">Six Degrees of Music</h1>
         </header>
         <Route exact path="/" component={Home}/>
