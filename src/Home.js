@@ -13,15 +13,18 @@ class Home extends Component {
 
   handleSearchClick(e) {
     e.preventDefault();
-    return fetch('http://localhost:8080/api/search/new', {
-      method: 'POST',
+    // The fetch library does not support search params on GET requests, so this
+    // is the workaround recommended by the library maintainers:
+    // See: https://github.com/github/fetch/issues/256
+    let url = new URL("http://127.0.0.1:5000/path"),
+    params = { artist_id_one: 38661, artist_id_two: 69866 }
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+
+    return fetch(url, {
+      method: 'GET',
       headers: {
        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-      },
-      body: qs.stringify({
-        artistone: "Taylor Swift",
-        artisttwo: "Kanye West",
-      }),
+      }
     })
     .then(response => response.json())
     .then((responseJson) => {
@@ -38,12 +41,12 @@ class Home extends Component {
           Find the shortest paths from
         </p>
         <SearchBar className="First-search-bar"/>
-        <i class="down arrow icon"></i>
+        <i className="down arrow icon"></i>
         <SearchBar className="Second-search-bar"/>
         <Link to="/search-results">
-          <button onClick={this.handleSearchClick} class="ui right labeled icon button">
+          <button onClick={this.handleSearchClick} className="ui right labeled icon button">
             Go!
-            <i class="right arrow icon"></i>
+            <i className="right arrow icon"></i>
           </button>
         </Link>
       </div>
