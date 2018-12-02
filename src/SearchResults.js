@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
 import Home from './Home';
 import MusicianCard from './MusicianCard';
-import logo from './logo.svg';
 
 class SearchResults extends Component {
 
@@ -48,7 +44,7 @@ class SearchResults extends Component {
       try {
         // var z = await Promise.reject(30);
         let artistone;
-        let feature = connection.type == "FEATURING" ? "Featuring " : "Featured by ";
+        let feature = connection.type === "FEATURING" ? "Featuring " : "Featured by ";
         let artisttwo;
         let song;
         musicianCardsData.push({ artistone, feature, artisttwo, song });
