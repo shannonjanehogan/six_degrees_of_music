@@ -18,8 +18,15 @@
   margin-top: 30px;
 }
 
+
 .App-intro {
   font-size: large;
+}
+
+.Search-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .ui.right.labeled.icon.button {

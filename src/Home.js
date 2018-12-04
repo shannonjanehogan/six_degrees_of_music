@@ -40,7 +40,7 @@ class Home extends Component {
         <p className="App-intro">
           Find the shortest paths from
         </p>
-        <SearchBar className="First-search-bar"/>
+        <SearchBar className="First-search-bar" />
         <i className="down arrow icon"></i>
         <SearchBar className="Second-search-bar"/>
         <Link to="/search-results">
