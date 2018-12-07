@@ -5,6 +5,8 @@ import SearchBar from './SearchBar';
 import Home from './Home';
 import MusicianCard from './MusicianCard';
 import logo from './logo.svg';
+import { connect } from 'react-redux';
+import { fetchPathsSuccess } from './actions/PathAction';
 
 class SearchResults extends Component {
 
@@ -42,19 +44,22 @@ class SearchResults extends Component {
   // Eminem -> (Eminem featuring KL) -> Kendrick Lamar ->
   // Kendrick Lamar -> (KL featuring U2) -> U2 ->
   // U2 -> (U2 featuring ABBA) -> ABBA
-  componentDidMount() {
+  async testFunction(connection) {
+    try {
+      let artistone = await this.props.pathAction();
+      let feature = connection.type === "FEATURING" ? "Featuring " : "Featured by ";
+      let artisttwo;
+      let song;
+      return { artistone, feature, artisttwo, song };
+    } catch(e) {
+      console.log(e);
+    }
+  }
+
+  test() {
     let musicianCardsData = [];
     this.state.path.forEach(function(connection) {
-      try {
-        // var z = await Promise.reject(30);
-        let artistone;
-        let feature = connection.type == "FEATURING" ? "Featuring " : "Featured by ";
-        let artisttwo;
-        let song;
-        musicianCardsData.push({ artistone, feature, artisttwo, song });
-      } catch(e) {
-        console.log(e); // 30
-      }
+      musicianCardsData.push(this.testFunction(connection))
     });
   }
 
@@ -84,4 +89,12 @@ class SearchResults extends Component {
   }
 }
 
-export default SearchResults;
+const mapStateToProps = state => ({
+ ...state
+})
+
+const mapDispatchToProps = dispatch => ({
+ fetchPathsSuccess: () => dispatch(fetchPathsSuccess())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);
