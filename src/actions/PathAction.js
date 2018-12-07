@@ -9,9 +9,10 @@ export const fetchPathsSuccess = (paths) => dispatch => {
  })
 }
 
-export function fetchPaths() {
+// TODO: Christina
+export function fetchPaths(dispatch) {
   console.log("IN FETCH PATHS")
-  return ((dispatch) => {
+  return dispatch => {
     console.log("HERE")
     let url = new URL("http://104.248.220.9/path"),
     params = { artist_id_one: 38661, artist_id_two: 69866 }
@@ -41,5 +42,5 @@ export function fetchPaths() {
     //   }).catch((error) => {
     //     // TODO
     //   });
-  });
+  };
 }

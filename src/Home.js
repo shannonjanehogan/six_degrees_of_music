@@ -14,7 +14,8 @@ class Home extends Component {
 
   handleSearchClick(e) {
     e.preventDefault();
-    fetchPaths();
+    // TODO: Christina
+    fetchPaths(this.props.dispatch)
   }
 
   render() {

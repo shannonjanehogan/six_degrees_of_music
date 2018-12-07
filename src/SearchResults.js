@@ -41,7 +41,9 @@ class SearchResults extends Component {
   // Eminem -> (Eminem featuring KL) -> Kendrick Lamar ->
   // Kendrick Lamar -> (KL featuring U2) -> U2 ->
   // U2 -> (U2 featuring ABBA) -> ABBA
-  async testFunction(connection) {
+  // Use artist id to make an api call to fetch the full artist name
+  // and parse api fields to readable english for display
+  async loadMusicianCard(connection) {
     try {
       let artistone = await this.props.pathAction();
       let feature = connection.type === "FEATURING" ? "Featuring " : "Featured by ";
@@ -53,20 +55,30 @@ class SearchResults extends Component {
     }
   }
 
-  test() {
+  // This function uses the api data to build an array of
+  // musician data into a usable format for displaying
+  assembleMusicianCardsData() {
     let musicianCardsData = [];
-    this.state.path.forEach(function(connection) {
-      musicianCardsData.push(this.testFunction(connection))
+    this.state.path.forEach((connection) => {
+      musicianCardsData.push(this.loadMusicianCard(connection))
     });
   }
 
   render() {
+    const {musicianCardsData} = this.state
     return (
       <div className="SearchResults">
         <Home/>
         <p className="App-intro"> Found 47 paths with 4 degrees of separation from Taylor Swift to Kanye: </p>
         <div className="ui cards">
-          {this.state.musicianCardsData.map(cardData => <MusicianCard artistone={cardData.artistone} feature={cardData.feature} artisttwo={cardData.artisttwo} song={cardData.song}/>)}
+          {musicianCardsData.map(cardData =>
+            <MusicianCard
+              artistone={cardData.artistone}
+              feature={cardData.feature}
+              artisttwo={cardData.artisttwo}
+              song={cardData.song}
+            />
+          )}
           <MusicianCard
             artistone="Taylor Swift"
             feature="Featuring "
