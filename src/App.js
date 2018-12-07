@@ -1,24 +1,18 @@
-import React, { Component } from 'react';
-import { Button, Icon, Grid } from 'semantic-ui-react';
-import { Route, Link } from 'react-router-dom';
-import logo from './logo.svg';
+import React from 'react';
+import { Route } from 'react-router-dom';
 import Home from './Home.js'
 import SearchResults from './SearchResults.js'
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <i className="circular inverted teal big music icon"></i>
-          <h1 className="App-title">Six Degrees of Music</h1>
-        </header>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/search-results" component={SearchResults}/>
-      </div>
-    );
-  }
-}
+const App = () => (
+  <div className="App">
+    <header className="App-header">
+      <i className="circular inverted teal big music icon"></i>
+      <h1 className="App-title">Six Degrees of Music</h1>
+    </header>
+    <Route exact path="/" component={Home}/>
+    <Route exact path="/search-results" component={SearchResults}/>
+  </div>
+)
 
-export default App;
+export default App
