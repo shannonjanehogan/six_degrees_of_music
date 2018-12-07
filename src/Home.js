@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import qs from 'qs';
