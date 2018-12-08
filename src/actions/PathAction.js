@@ -1,38 +1,41 @@
 import { push } from 'react-router-redux';
-import ArtistsApi from '../api/artists';
+// import ArtistsApi from '../api/artists';
 
-// Synchronous action
 export const fetchPathsSuccess = (paths) => dispatch => {
-  console.log("FETCH PATHS SUCESS")
  dispatch({
   type: 'FETCH_PATHS_SUCCESS',
   payload: paths
  })
 }
 
-// Async action
-// TODO: Christina
-export function fetchPaths(dispatch) {
-  console.log("IN FETCH PATHS")
-  return dispatch => {
-    // CHRISTINA: We never make it to this console log. What's wrong? :(
-    console.log("HERE")
-    let url = new URL("http://104.248.220.9/path"),
-    params = { artist_id_one: 38661, artist_id_two: 69866 }
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-    return fetch(url, {
+export const fetchPaths = (dispatch) => {
+  return async (dispatch) => {
+    let url = new URL("http://104.248.220.9/path")
+
+    const fetchParams = {
       method: 'GET',
       headers: {
        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
       }
-    }).then(
-     response => response.json(),
-     error => console.log('An error occurred.', error)
-   ).then(json =>
-     console.log(json),
-     dispatch(push('/search-results')),
-     dispatch(fetchPathsSuccess(json))
-   )
+    }
+
+    const artistIds = { artist_id_one: 38661, artist_id_two: 69866 }
+    Object.keys(artistIds).forEach(key => url.searchParams.append(key, artistIds[key]))
+
+    try {
+      const response = await fetch(url, fetchParams)
+      const responseJson = await response.json()
+
+      // need to get the push working
+      dispatch(push('/search-results'))
+      
+      dispatch(fetchPathsSuccess(responseJson))
+    } catch (error) {
+      console.log('An error occurred.', error)
+    }
+
+    // what is this?
+
     // ArtistsApi
     //   .findPath(1, 2)
     //   .then((jsonResponse) => {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Home from './Home';
 import MusicianCard from './MusicianCard';
-import logo from './logo.svg';
 import { connect } from 'react-redux';
 import { fetchPathsSuccess } from './actions/PathAction';
 
