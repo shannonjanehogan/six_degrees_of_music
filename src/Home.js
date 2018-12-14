@@ -9,8 +9,8 @@ const Home = ({handleSearchClick, history, pathSuccess}) => {
   if (pathSuccess) {
     return <Redirect to={{pathname: "/search-results"}} />;
   }
-  return
-  (<div className="Home">
+  return (
+    <div className="Home">
       <p className="App-intro">
         Find the shortest paths from
       </p>
