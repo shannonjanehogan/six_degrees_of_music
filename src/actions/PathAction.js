@@ -1,10 +1,22 @@
-import { push } from 'react-router-redux';
 import ArtistsApi from '../api/artists';
 
 export const fetchPathsSuccess = (paths) => dispatch => {
  dispatch({
   type: 'FETCH_PATHS_SUCCESS',
-  payload: paths
+  payload: { paths }
+ })
+}
+
+export const fetchPathsError = () => dispatch => {
+ dispatch({
+  type: 'FETCH_PATHS_ERROR',
+ })
+}
+
+export const fetchArtistInfoSuccess = (artistInfo) => dispatch => {
+ dispatch({
+  type: 'FETCH_ARTIST_INFO_SUCCESS',
+  payload: artistInfo
  })
 }
 
@@ -13,9 +25,19 @@ export const fetchPaths = (dispatch) => {
     try {
       const response = await ArtistsApi.findPath(1, 2)
       const responseJson = await response.json()
-      // need to get the push working
-      dispatch(push('/search-results'))
       dispatch(fetchPathsSuccess(responseJson))
+    } catch (error) {
+      dispatch(fetchPathsError())
+    }
+  };
+}
+
+export const fetchArtistInfo = (dispatch) => {
+  return async (dispatch) => {
+    try {
+      const response = await ArtistsApi.fetchArtistInfo(1)
+      const responseJson = await response.json()
+      dispatch(fetchArtistInfoSuccess(responseJson))
     } catch (error) {
       console.log('An error occurred.', error)
     }
