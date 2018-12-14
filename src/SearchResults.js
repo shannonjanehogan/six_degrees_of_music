@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Home from './Home';
 import MusicianCard from './MusicianCard';
 import { connect } from 'react-redux';
-import { fetchPathsSuccess } from './actions/PathAction';
+import { fetchArtistInfo } from './actions/PathAction';
 
 class SearchResults extends Component {
 
@@ -37,6 +37,11 @@ class SearchResults extends Component {
     };
   }
 
+  componentDidMount() {
+    // TODO needs to be moved to when state has updated with returned API data
+    this.assembleMusicianCardsData()
+  }
+
   // Eminem -> (Eminem featuring KL) -> Kendrick Lamar ->
   // Kendrick Lamar -> (KL featuring U2) -> U2 ->
   // U2 -> (U2 featuring ABBA) -> ABBA
@@ -44,10 +49,10 @@ class SearchResults extends Component {
   // and parse api fields to readable english for display
   async loadMusicianCard(connection) {
     try {
-      let artistone = await this.props.pathAction();
+      let artistone = connection.start.name
       let feature = connection.type === "FEATURING" ? "Featuring " : "Featured by ";
-      let artisttwo;
-      let song;
+      let artisttwo = connection.end.name
+      let song = await "Hey yall";
       return { artistone, feature, artisttwo, song };
     } catch(e) {
       console.log(e);
@@ -56,11 +61,13 @@ class SearchResults extends Component {
 
   // This function uses the api data to build an array of
   // musician data into a usable format for displaying
-  assembleMusicianCardsData() {
+  async assembleMusicianCardsData() {
     let musicianCardsData = [];
-    this.state.path.forEach((connection) => {
-      musicianCardsData.push(this.loadMusicianCard(connection))
-    });
+    for (const connection of this.state.path) {
+      let cardData = await this.loadMusicianCard(connection)
+      musicianCardsData.push(cardData)
+    }
+    this.setState({musicianCardsData})
   }
 
   render() {
@@ -70,13 +77,14 @@ class SearchResults extends Component {
         <Home/>
         <p className="App-intro"> Found 47 paths with 4 degrees of separation from Taylor Swift to Kanye: </p>
         <div className="ui cards">
-          {musicianCardsData.map(cardData =>
-            <MusicianCard
-              artistone={cardData.artistone}
-              feature={cardData.feature}
-              artisttwo={cardData.artisttwo}
-              song={cardData.song}
-            />
+          {musicianCardsData.map((cardData, index) =>
+              <MusicianCard
+                artistone={cardData.artistone}
+                feature={cardData.feature}
+                artisttwo={cardData.artisttwo}
+                song={cardData.song}
+                key={index}
+              />
           )}
           <MusicianCard
             artistone="Taylor Swift"
@@ -102,7 +110,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
- fetchPathsSuccess: () => dispatch(fetchPathsSuccess())
+ getArtistInfo: () => dispatch(fetchArtistInfo())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchResults);
