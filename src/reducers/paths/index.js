@@ -14,10 +14,6 @@ export default (state = initialState, action) => {
    return {
     pathSuccess: false
   }
-  case 'FETCH_ARTIST_INFO_SUCCESS':
-   return {
-    artistInfo: action.payload
-  }
   default:
    return state
  }

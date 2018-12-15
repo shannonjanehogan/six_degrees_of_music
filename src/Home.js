@@ -1,15 +1,19 @@
 import React from 'react';
-import { withRouter, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import SearchBar from './SearchBar';
+import SearchResults from './SearchResults';
 import { connect } from 'react-redux';
 import { fetchPaths } from './reducers/paths/actions';
 
-const Home = ({handleSearchClick, history, paths: {pathSuccess}}) => {
-
-  if (pathSuccess) {
-    return <Redirect to={{pathname: "/search-results"}} />;
+const PageBody = ({searchSuccess}) => {
+  if (searchSuccess) {
+    return (<SearchResults />)
   }
 
+  return null
+}
+
+const Home = ({handleSearchClick, history, paths: {pathSuccess}}) => {
   return (
     <div className="Home">
       <p className="App-intro">
@@ -22,7 +26,9 @@ const Home = ({handleSearchClick, history, paths: {pathSuccess}}) => {
         Go!
         <i className="right arrow icon"></i>
       </button>
-    </div>)
+      <PageBody searchSuccess={pathSuccess} />
+    </div>
+  )
 }
 
 const mapStateToProps = state => ({
