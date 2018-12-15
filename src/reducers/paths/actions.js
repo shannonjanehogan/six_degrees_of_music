@@ -13,7 +13,6 @@ export const fetchPaths = (dispatch) => {
       const response = await ArtistsApi.findPath(1, 2)
       const path = await response.json()
 
-      console.log('path', path)
       dispatch({
        type: 'FETCH_PATHS_SUCCESS',
        payload: {path}
