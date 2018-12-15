@@ -1,4 +1,9 @@
-export default (state = {}, action) => {
+export const initialState = {
+  path: [],
+  pathSuccess: false
+}
+
+export default (state = initialState, action) => {
  switch (action.type) {
   case 'FETCH_PATHS_SUCCESS':
    return {

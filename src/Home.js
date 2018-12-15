@@ -2,13 +2,15 @@ import React from 'react';
 import { withRouter, Redirect } from "react-router-dom";
 import SearchBar from './SearchBar';
 import { connect } from 'react-redux';
-import { fetchPaths } from './actions/PathAction';
+import { fetchPaths } from './reducers/paths/actions';
 
-const Home = ({handleSearchClick, history, pathReducer:{pathSuccess = false}}) => {
+const Home = ({handleSearchClick, history}) => {
+  //placeholder value
+  const pathSuccess = 1
   if (pathSuccess) {
     return <Redirect to={{pathname: "/search-results"}} />;
   }
-  
+
   return (
     <div className="Home">
       <p className="App-intro">

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Home from './Home';
 import MusicianGroup from './MusicianGroup';
 import { connect } from 'react-redux';
-import { fetchArtistInfo } from './actions/PathAction';
+import { fetchArtistInfo } from './reducers/artists/actions';
 
 class SearchResults extends Component {
 
