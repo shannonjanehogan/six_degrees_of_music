@@ -1,11 +1,5 @@
 import ArtistsApi from '../../api/artists';
-
-export const fetchPathsSuccess = (paths) => dispatch => {
- dispatch({
-  type: 'FETCH_PATHS_SUCCESS',
-  payload: { paths }
- })
-}
+import {assembleMusicianCardsData} from '../artists/actions'
 
 export const fetchPathsError = () => dispatch => {
  dispatch({
@@ -17,8 +11,14 @@ export const fetchPaths = (dispatch) => {
   return async (dispatch) => {
     try {
       const response = await ArtistsApi.findPath(1, 2)
-      const responseJson = await response.json()
-      dispatch(fetchPathsSuccess(responseJson))
+      const path = await response.json()
+
+      console.log('path', path)
+      dispatch({
+       type: 'FETCH_PATHS_SUCCESS',
+       payload: {path}
+      })
+      dispatch(assembleMusicianCardsData())
     } catch (error) {
       dispatch(fetchPathsError())
     }

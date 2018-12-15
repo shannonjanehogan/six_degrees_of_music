@@ -5,8 +5,8 @@ import SearchResults from './SearchResults';
 import { connect } from 'react-redux';
 import { fetchPaths } from './reducers/paths/actions';
 
-const PageBody = ({searchSuccess}) => {
-  if (searchSuccess) {
+const PageBody = ({pathSuccess}) => {
+  if (pathSuccess) {
     return (<SearchResults />)
   }
 
@@ -26,7 +26,7 @@ const Home = ({handleSearchClick, history, paths: {pathSuccess}}) => {
         Go!
         <i className="right arrow icon"></i>
       </button>
-      <PageBody searchSuccess={pathSuccess} />
+      <PageBody pathSuccess={pathSuccess} />
     </div>
   )
 }

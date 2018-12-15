@@ -3,78 +3,18 @@ import MusicianGroup from './MusicianGroup';
 import { connect } from 'react-redux';
 import { fetchArtistInfo } from './reducers/artists/actions';
 
-// TODO needs to be moved to when state has updated with returned API data
-// this.assembleMusicianCardsData()
-
-// Eminem -> (Eminem featuring KL) -> Kendrick Lamar ->
-// Kendrick Lamar -> (KL featuring U2) -> U2 ->
-// U2 -> (U2 featuring ABBA) -> ABBA
-// Use artist id to make an api call to fetch the full artist name
-// and parse api fields to readable english for display
-// async loadMusicianCard(connection) {
-//   try {
-//     let artistone = connection.start.name
-//     let feature = connection.type === "FEATURING" ? "Featuring " : "Featured by ";
-//     let artisttwo = connection.end.name
-//     let song = await "Hey yall";
-//     return { artistone, feature, artisttwo, song };
-//   } catch(e) {
-//     console.log(e);
-//   }
-// }
-//
-// // This function uses the api data to build an array of
-// // musician data into a usable format for displaying
-// async assembleMusicianCardsData() {
-//   let musicianCardsData = [];
-//   for (const connection of this.state.path) {
-//     let cardData = await this.loadMusicianCard(connection)
-//     musicianCardsData.push(cardData)
-//   }
-//   // this.setState({musicianCardsData})
-// }
-
-const SearchResults = ({artists, paths}) => {
-  const {
-    path = [{
-      "connection":{
-        "extras":{
-          forwar:true,
-          "masterId":"975947"
-        },
-        "type":"FEATURING"
-      },
-      "end":{"id":"1778977","name":"Kendrick Lamar"},
-      "start":{"id":"38661","name":"Eminem"}},
-      {"connection":{
-      "extras":{
-        forwar:false,
-        "masterId":"1272367"
-      },
-      "type":"FEATURING"},
-      "end":{"id":"6520","name":"U2"},
-      "start":{"id":"1778977","name":"Kendrick Lamar"}},
-      {"connection":
-      {"extras":
-        {forwar:true,"masterId":"583976"},
-        "type":"FEATURING"},
-        "end":{"id":"69866","name":"ABBA"},
-        "start":{"id":"6520","name":"U2"}
-    }]
-  } = paths
+const SearchResults = ({artists}) => {
 
   const {musicianCardsData} = artists
-
-  console.log('path', path)
 
   return (
         <div className="SearchResults">
           <p className="App-intro"> Found 47 paths with 4 degrees of separation from Taylor Swift to Kanye: </p>
             {musicianCardsData.map((cardData, index) =>
                 <MusicianGroup
-                  artistone={cardData.artistone}
+                  artistone={cardData.artistOne}
                   feature={cardData.feature}
-                  artisttwo={cardData.artisttwo}
+                  artisttwo={cardData.artistTwo}
                   song={cardData.song}
                   key={index}
                   isLastCard={musicianCardsData.length - 1 === index}
