@@ -4,11 +4,11 @@ import SearchBar from './SearchBar';
 import { connect } from 'react-redux';
 import { fetchPaths } from './actions/PathAction';
 
-const Home = ({handleSearchClick, history, pathSuccess}) => {
-  console.log('pathSuccess', pathSuccess)
+const Home = ({handleSearchClick, history, pathReducer:{pathSuccess = false}}) => {
   if (pathSuccess) {
     return <Redirect to={{pathname: "/search-results"}} />;
   }
+  
   return (
     <div className="Home">
       <p className="App-intro">
@@ -24,11 +24,9 @@ const Home = ({handleSearchClick, history, pathSuccess}) => {
     </div>)
 }
 
-const mapStateToProps = state => {
-  return {
-    pathSuccess: false,
-  }
-}
+const mapStateToProps = state => ({
+  ...state
+})
 
 const mapDispatchToProps = dispatch => ({
   handleSearchClick: (event) => {
