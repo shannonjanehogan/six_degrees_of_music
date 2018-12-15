@@ -4,9 +4,8 @@ import SearchBar from './SearchBar';
 import { connect } from 'react-redux';
 import { fetchPaths } from './reducers/paths/actions';
 
-const Home = ({handleSearchClick, history}) => {
-  //placeholder value
-  const pathSuccess = 1
+const Home = ({handleSearchClick, history, paths: {pathSuccess}}) => {
+
   if (pathSuccess) {
     return <Redirect to={{pathname: "/search-results"}} />;
   }
