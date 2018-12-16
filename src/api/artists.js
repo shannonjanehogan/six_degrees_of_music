@@ -15,6 +15,7 @@ class ArtistsApi {
       }
     })
   }
+
   static fetchArtistInfo(artist_id) {
     let url = new URL(`http://104.248.220.9/artists/${artist_id}`)
     return fetch(url, {

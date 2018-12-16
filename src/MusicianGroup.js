@@ -1,14 +1,14 @@
 import React from 'react';
 import MusicianCard from './MusicianCard';
 
-const MusicianGroup = ({artistone, feature, artisttwo, song, index, isLastCard}) => {
+const MusicianGroup = ({artistOne, feature, artistTwo, song, index, isLastCard}) => {
   // TODO rename to ui card and fix resulting css issue
     if (!isLastCard) {
       return (<div className="ui cards">
         <MusicianCard
-          artistone={artistone}
+          artistOne={artistOne}
           feature={feature}
-          artisttwo={artisttwo}
+          artistTwo={artistTwo}
           song={song}
           key={index}
         />
@@ -17,9 +17,9 @@ const MusicianGroup = ({artistone, feature, artisttwo, song, index, isLastCard})
     }
     return (<div className="ui cards">
       <MusicianCard
-        artistone={artistone}
+        artistOne={artistOne}
         feature={feature}
-        artisttwo={artisttwo}
+        artistTwo={artistTwo}
         song={song}
         key={index}
       />

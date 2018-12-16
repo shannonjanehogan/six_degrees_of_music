@@ -1,13 +1,12 @@
 import React from 'react';
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import SearchBar from './SearchBar';
-import SearchResults from './SearchResults';
 import { connect } from 'react-redux';
 import { fetchPaths } from './reducers/paths/actions';
 
 const PageBody = ({pathSuccess}) => {
   if (pathSuccess) {
-    return (<SearchResults />)
+    return (<Redirect to={{pathname: "/search-results"}} />)
   }
 
   return null
