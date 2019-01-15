@@ -1,17 +1,17 @@
 import React from 'react';
 
-const MusicianCard = () => (
+const MusicianCard = ({artistOne, feature, artistTwo, song}) => (
   <div className="card">
     <div className="content">
       <i className="circular inverted teal big music icon"></i>
       <div className="header">
-        {this.props.artistone}
+        {artistOne}
       </div>
       <div className="meta">
-        {this.props.feature} {this.props.artisttwo}
+        {feature} {artistTwo}
       </div>
       <div className="description">
-        {this.props.song}
+        {song}
       </div>
     </div>
   </div>
